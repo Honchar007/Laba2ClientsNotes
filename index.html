@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="script.js"></script>
+  <link href="style.css" rel="stylesheet">
+  
+  <title></title>
+</head>
+<body onload="AddStorage()"  >
+  <form action="index.html" >
+<div class="mainWind">
+  <div class="notes"onload="AddStorage()" id="notes">
+  </div>
+  <div class="prostavka"></div>
+  
+  <div class="currentNote">
+    <div class="dateEdit" id="dateEdit"  ></div>
+    <textarea id="text" class="text" name="comment" oninput="changeDate()"></textarea>
+  </div>
+    
+</div>
+
+<div class="functions">
+    <input class= "redDelSav" type="button"  onclick="Save()" value="Сохранить">
+    <input class= "redDelSav" type="button"  onclick="Delete()" value="Удалить">
+    <input class= "redDelSav" id="add" onclick="myFunction()" type="button"  value="Добавить">
+    <input class= "redDelSav"  onclick= "clearAll()" type="button"  value="Clear">
+
+</div>
+<div class="link"> 
+  <a href="#">
+    <div>asdsadsadsadsad</div>
+    <div>asdsadsadsadsad</div>
+    <div>asdsadsadsadsad</div>
+
+    </a>
+
+
+</div>
+</form>
+</body>
+</html>

@@ -1,0 +1,128 @@
+::-webkit-scrollbar {
+  width: 5px;
+
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+   background: #515156;
+   border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #807f84; 
+  width: 20px;
+  border-radius: 50px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  width: 8px;
+   
+}
+body{
+   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+}
+.notChosen{
+  display: block;text-decoration: none; height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+  transform: scaleX(-1);
+}
+.Chosen{
+  background: #c99420;
+
+}
+.mainWind{
+  display:flex;
+  background: #1d1c23;
+  color:white;
+  width: 100%;
+  height: 200px;
+}
+a:active {
+  display: block; text-decoration: none;  height: 100%; width: 100% ; 
+  background: #ca9420;
+}
+.toolbar{
+  
+  width:100%;
+  height :30px;
+  background:yellow;
+}
+.notes{
+  margin:10px;
+  padding-right:10px;
+  width:30%;
+  flex-direction: row-reverse;
+
+overflow: auto;
+transform: scaleX(-1);
+}
+.splt{
+  height:3px;
+    background:black;
+  margin-left:10px;
+    margin-right:10px;
+  margin-top:0px;
+  border-radius:50px;
+}
+.prostavka{
+  padding:0;
+  background:#060607;
+  width:2px;
+}
+.currentNote{
+  width:95%;
+  height:100%;
+  background:#272727;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+}
+
+.link {
+     width: 300px; /* Ширина слоя */
+     height: 200px; /* Высота слоя */
+     background: #fc0; /* Цвет фона */
+    }
+    .link a {
+     display: block; /* Ссылка как блочный элемент */
+     text-align: center; /* Выравнивание по центру */
+     height: 100%; /* Высота на весь слой */
+     color: #666; /* Цвет ссылки */
+    }
+
+
+
+.dateEdit{
+  height:20px;
+  text-align:center;
+  color: #989897eb;
+}
+.text{
+   width:95%;
+  height:120px;
+  margin-left:10px;
+  background:#272727;
+  color:white;
+  border: none;
+  outline: none;
+  resize: none;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+font-size: 22px;
+}
+.functions{
+  display: flex;
+  padding:2px;
+  text-align: right;
+    bottom: -20px;
+    right: 10px;
+    margin-left: -1.5px;
+}
+.redDelSav{
+  margin-right:10px;
+  border-radius: 50px;
+   outline:none;
+}
