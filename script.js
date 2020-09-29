@@ -8,7 +8,7 @@ for (let i = 0; i < localStorage.length; i++) {
     }
 console.log(result);
 */
-
+//localStorage.clear();
 window.onhashchange = funcRef;
 function funcRef()
 {
@@ -52,7 +52,8 @@ document.getElementById("dateEdit").innerHTML="";
 function myFunction()
 {
  //  $('#text').val(); alert(text);
-
+if(lastVal!=null )
+lastVal.classList.remove('Chosen');
  var txt="43t43t";
  txt = document.getElementById('text').value;
 //alert(txt);
@@ -165,14 +166,19 @@ var lastVal ;
 function GetCurrent(val)
 {
 //if(val.id != last.id)last.setAttribute("style","display: block;text-decoration: none;  height: 100%;");
-
+console.log(val);
 var val2 = location.hash.match(/[^#]+/g);
+
+
 var noteAdd  = JSON.parse(localStorage.getItem(val2));
 
 var textarDate =document.getElementById("dateEdit");
-val.classList.add('Chosen');
-if(lastVal!=null)
+
+if(lastVal!=null  )
 lastVal.classList.remove('Chosen');
+
+
+val.classList.add('Chosen');
 
 lastVal =val;
 
@@ -180,11 +186,10 @@ lastVal =val;
 	//alert("ID " +val.id)
 	//alert("GetCurrent"+ val.id);
 	//alert(val.id);
-console.log(localValue); //"myValue"
+//console.log(localValue); //"myValue"
 current = val;
 var textar = document.getElementById("text");
-console.log(localValue);
-textarDate.innerHTML = noteAdd.date+"."+(noteAdd.month)+"."+noteAdd.year+" "+noteAdd.hour+":"+noteAdd.minute;;
+//console.log(localValue);
 
 textar.value = localValue.alltext;
 //val.setAttribute("style","display: block; text-decoration: none;  height: 100%; width: 100% ; ");
