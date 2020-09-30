@@ -9,6 +9,18 @@ for (let i = 0; i < localStorage.length; i++) {
 console.log(result);
 */
 //localStorage.clear();
+/*
+if(location.hash!="")
+{
+	//alert(val);
+	var val = location.hash.match(/[^#]+/g);
+	funcRef();
+	var elem = document.getElementById(val);
+	GetCurrent(elem);
+
+}
+*/
+location.hash="";
 window.onhashchange = funcRef;
 function funcRef()
 {
@@ -19,10 +31,13 @@ function funcRef()
 	var textarDate =document.getElementById("dateEdit");
 var dd = new Date();
 	var localValue = JSON.parse(localStorage.getItem(val));
+	var elem = document.getElementById(val);
+	GetCurrent(elem);
+	//alert(val+" Funcref");
 	//alert("ID " +val);
 	//alert("GetCurrent"+ val.id);
 	//alert(val.id);
-console.log(localValue); //"myValue"
+//console.log(localValue); //"myValue"
 var noteAdd = localValue;
 var textar = document.getElementById("text");
 //console.log(localValue);
@@ -168,7 +183,6 @@ function GetCurrent(val)
 //if(val.id != last.id)last.setAttribute("style","display: block;text-decoration: none;  height: 100%;");
 console.log(val);
 var val2 = location.hash.match(/[^#]+/g);
-
 
 var noteAdd  = JSON.parse(localStorage.getItem(val2));
 
