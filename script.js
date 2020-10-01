@@ -13,21 +13,24 @@ console.log(result);
 if(location.hash!="")
 {
 	//alert(val);
-	var val = location.hash.match(/[^#]+/g);
+	;
 	funcRef();
 	var elem = document.getElementById(val);
 	GetCurrent(elem);
 
 }
 */
-location.hash="";
+
+
 window.onhashchange = funcRef;
 function funcRef()
 {
+
 	if(location.hash!="")
 	try
 	{
 		var val = location.hash.match(/[^#]+/g);
+		alert(val);
 	var textarDate =document.getElementById("dateEdit");
 var dd = new Date();
 	var localValue = JSON.parse(localStorage.getItem(val));
@@ -92,7 +95,7 @@ var line = document.createElement("div");
 line.id= "line"+i;
 
 var key=""
-    key=words[0].replace(" ","");
+    key=words[0].replace(/ /g,"");
     
 
 	var wordForSub = "";
@@ -213,14 +216,18 @@ last = val;
 var current = {};
 function Delete()
 {
-var link = window.location.href;
+	var deleteOrNot = window.location.href.match(/[^#]+/g);
+	if(deleteOrNot[1]!=undefined)
+	{
+		alert(deleteOrNot[1]);
+		var link = window.location.href;
 var words = link.split('#');
 var elem = document.getElementById("notes");
 
 var key=""
-    key=words[1].replace("%20"," ");
+    key=words[1].replace(/%20/g," ");
  last = JSON.parse(localStorage.getItem(key)) ;
-var tempForId = last.zagolovok.replace(" ","");
+var tempForId = last.zagolovok.replace(/ /g,"");
 
 //alert(words[1]);
 var child = document.getElementById(words[1]);
@@ -238,6 +245,12 @@ localStorage.removeItem(key);
  document.getElementById('text').value="";
 document.getElementById("dateEdit").innerHTML="";
 location.hash="";
+	}
+	else
+	{
+	console.log("Choose to delete");
+	}
+
 
 //localStorage.clear();
 }
@@ -395,7 +408,7 @@ var line = document.createElement("div");
 line.id= "line"+noteAdd.idgen;
 
 var key=""
-    key=words[0].replace(" ","");
+    key=words[0].replace(/ /g,"");
     
 
 	var wordForSub = "";
@@ -444,14 +457,4 @@ if(words.length>0)
 }
 
 }
-//link.href="http://google.com";
-//elem.appendChild(br);
-
-/*
-*/
-
-//alert(document.getElementsByClassName("taxonomy-images")[0].innerHTML);
-
-/*document.fuck.append(div);
-body.insertAdjacentHTML('beforeend', '<p>Привет</p>');*/
 
