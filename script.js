@@ -61,6 +61,14 @@ textar.value = localValue.alltext;
 
 	
 }
+function getProp(some)
+{
+	var res="";
+if(some<10)res+="0"+some;
+else res+= some;
+//alert(res);
+return res;
+}
 function changeDate()
 {
 document.getElementById("dateEdit").innerHTML="";
@@ -93,7 +101,16 @@ var line = document.createElement("div");
 line.id= "line"+i;
 
 var key=""
-    key=words[0].replace(/ /g,"");
+key+= getProp(dd.getDate());
+key+= getProp(dd.getHours());
+key+= getProp(dd.getMinutes());
+key+= getProp(dd.getSeconds());
+key+= getProp(dd.getMilliseconds());
+var keyWord=words[0].replace(/ /g,"");
+//alert(key);
+
+
+    //key=""+dd.getDate()+dd.getHours()+dd.getMinutes()+dd.getSeconds()+dd.getMilliseconds()+words[0].replace(/ /g,"");
     
 
 	var wordForSub = "";
@@ -116,16 +133,7 @@ if(words.length>0)
 		mainText.innerHTML="<a href='#' style='display: block;  height: 100%;' onclick='' >"+words[0]+"<br>";
 	if(words.length>1)
 	{
-/*	subText.innerHTML+="\t"+words[1]+"</a>";
-	//note.appendChild(link);
-	note.innerHTML="<a href='#' style='display: block;  height: 100%;' onclick='' > </a>";
-	//note.appendChild(mainText);
-	note.appendChild(mainText);
-	note.appendChild(date);
-	note.appendChild(subText);
-	elem.appendChild(note);
-	elem.appendChild(line);*/
-	note.innerHTML="<a href='#"+key+i+"' id='"+key+i+"'class='notChosen' onclick='GetCurrent(this)' ><div class='mainText' style='color:#c4c4c6; margin-left:10px;'>"+
+	note.innerHTML="<a href='#"+key+keyWord+i+"' id='"+key+keyWord+i+"'class='notChosen' onclick='GetCurrent(this)' ><div class='mainText' style='color:#c4c4c6; margin-left:10px;'>"+
 	wordForMain+"</div> <div class='date' style='color:#f2e6d0;display:inline;margin-left:10px font-size:15px;'>"+
 	dd.getDate()+"."+(dd.getMonth()+1)+"."+dd.getFullYear() +"</div><div class='subText' style='color:#f2e7d1; display:inline; margin-left:30px;font-size: 18px;'>\t"
 	+wordForSub+"</div>"+"</a>";
@@ -138,17 +146,18 @@ if(words.length>0)
 	else
 	{
 	
-	note.innerHTML="<a href='#"+key+i+"' id='"+key+i+"' class='notChosen'  onclick='GetCurrent(this)' ><div class='mainText' style='color:#c4c4c6; margin-left:10px;'>"+
+	note.innerHTML="<a href='#"+key+keyWord+i+"' id='"+key+keyWord+i+"' class='notChosen'  onclick='GetCurrent(this)' ><div class='mainText' style='color:#c4c4c6; margin-left:10px;'>"+
 	wordForMain+"</div> <div class='date' style='color:#f2e6d0;display:inline;margin-left:10px font-size:15px;'>"+
 	dd.getDate()+"."+(dd.getMonth()+1)+"."+dd.getFullYear() +"</div></a>";
 	elem.prepend(line);
 	elem.prepend(note);
 	}
-
+var number = key;
 	var Note={
  	zagolovok: words[0],
  	dateOfEdit: dd,
  	alltext: txt ,
+ 	kk:number,
  	idgen:i,
  	month:(dd.getMonth()+1),
  	date: dd.getDate(),
@@ -157,7 +166,7 @@ if(words.length>0)
  	hour:dd.getHours()
 	 };
 	 var serialObj = JSON.stringify(Note);
-	 localStorage.setItem(key+i,serialObj);
+	 localStorage.setItem(key+keyWord+i,serialObj);
 	 //alert("Set "+key+i);
 	 i=i+1;
 	 location.hash = "#";
@@ -170,6 +179,7 @@ if(words.length>0)
 var last ={zagolovok: '',
  	dateOfEdit:'' ,
  	alltext: '' ,
+ 	kk: '' , 
  	idgen: ''+0,
  	month:''+0,
  	date: ''+0,
@@ -218,7 +228,7 @@ function Delete()
 	var deleteOrNot = window.location.href.match(/[^#]+/g);
 	if(deleteOrNot[1]!=undefined)
 	{
-		alert(deleteOrNot[1]);
+		alert(deleteOrNot[1]+"DELETE");
 		var link = window.location.href;
 var words = link.split('#');
 var elem = document.getElementById("notes");
@@ -227,6 +237,7 @@ var key=""
     key=words[1].replace(/%20/g," ");
  last = JSON.parse(localStorage.getItem(key)) ;
 var tempForId = last.zagolovok.replace(/ /g,"");
+	var idc = JSON.parse(localStorage.getItem(deleteOrNot[1]));
 
 //alert(words[1]);
 var child = document.getElementById(words[1]);
@@ -236,7 +247,7 @@ child.remove(elem);
 //var id = key.match(/[^tempForId]+/g);
 var id = key.replace(tempForId,"");
 //alert(id);
-var linetoRem = document.getElementById("line"+id);
+var linetoRem = document.getElementById("line"+idc.idgen);
 linetoRem.remove(elem);
 localStorage.removeItem(key);
 
@@ -261,8 +272,10 @@ function Save()
 {
 	var link = window.location.href;
 var words2 = link.split('#');
-var id = words2[1].match(/[^a-z]+/g);
-var linetoRem = document.getElementById("line"+id);
+	var idc = JSON.parse(localStorage.getItem(words2[1]));
+
+//var id = words2[1].match(/[^a-z]+/g);
+var linetoRem = document.getElementById("line"+idc.idgen);
 linetoRem.remove(elem);
 var elem = document.getElementById("notes");
 //alert(words[1]);
@@ -291,6 +304,14 @@ var line = document.createElement("div");
 	line.setAttribute("style", "height:3px;background:#2a2930;margin-left:10px;margin-right:10px;margin-top:0px;border-radius:50px;");
 	var wordForSub = "";
 	var wordForMain="";
+	var key=""
+key+= getProp(dd.getDate());
+key+= getProp(dd.getHours());
+key+= getProp(dd.getMinutes());
+key+= getProp(dd.getSeconds());
+key+= getProp(dd.getMilliseconds());
+var keyWord=words[0].replace(/ /g,"");
+
 if(words.length>0)
 	if(words[0].length<10)
 		wordForMain = words[0];
@@ -303,13 +324,13 @@ if(words.length>0)
 	}else{
 		wordForSub =words[1].substr(0, 10)+"..";
 	}
-line.id= "line"+id;
+line.id= "line"+idc.idgen;
 if(words.length>0)
 {
 		mainText.innerHTML="<a href='#' style='display: block;  height: 100%;' onclick='' >"+words[0]+"<br>";
 	if(words.length>1)
 	{
-	note.innerHTML="<a href='#"+words[0]+id+"' id='"+words[0]+id+"' class='notChosen'  onclick='GetCurrent(this)' ><div class='mainText' style='color:#c4c4c6; margin-left:10px;'>"+
+	note.innerHTML="<a href='#"+key+keyWord+idc.idgen+"' id='"+key+keyWord+idc.idgen+"' class='notChosen'  onclick='GetCurrent(this)' ><div class='mainText' style='color:#c4c4c6; margin-left:10px;'>"+
 	wordForMain+"</div> <div class='date' style='color:#f2e6d0;display:inline;margin-left:10px font-size:15px;'>"+
 	dd.getDate()+"."+(dd.getMonth()+1)+"."+dd.getFullYear() +"</div><div class='subText' style='color:#e2c690; display:inline; margin-left:30px;font-size: 18px;'>\t"
 	+wordForSub+"</div>"+"</a>";
@@ -322,7 +343,7 @@ if(words.length>0)
 	else
 	{
 	
-	note.innerHTML="<a href='#"+words[0]+id+"' id='"+words[0]+id+"' class='notChosen' onclick='GetCurrent(this)' ><div class='mainText' style='color:#c4c4c6; margin-left:10px;'>"+
+	note.innerHTML="<a href='#"+key+keyWord+idc.idgen+"' id='"+key+keyWord+idc.idgen+"' class='notChosen' onclick='GetCurrent(this)' ><div class='mainText' style='color:#c4c4c6; margin-left:10px;'>"+
 	wordForMain+"</div> <div class='date' style='color:#f2e6d0;display:inline;margin-left:10px font-size:15px;'>"+
 	dd.getDate()+"."+(dd.getMonth()+1)+"."+dd.getFullYear() +"</div></a>";
 	elem.prepend(line);
@@ -342,10 +363,11 @@ localStorage.removeItem(words2[1]);
 	item.zagolovok = words[0];
 	item.dateOfEdit = dd;
 	item.alltext = txt;
+	item.kk = key;
 	 var serialObj = JSON.stringify(item);
-	 console.log(words[0]+id);
+	 console.log(key+keyWord+idc.idgen);
 	// alert(words[0]+id);
-	 localStorage.setItem(words[0]+id,serialObj);
+	 localStorage.setItem(key+keyWord+idc.idgen,serialObj);
  
 
 
@@ -365,19 +387,45 @@ document.getElementById("dateEdit").innerHTML="";
 var i=0;
 function AddStorage()
 {
+var minres =  [];
 	for(let i=0; i<localStorage.length; i++) {
   let key = localStorage.key(i);
-  AddFromStorage(key);
+  var noteAdd  = JSON.parse(localStorage.getItem(key));
+  minres.push(parseInt(noteAdd.kk));
+  //alert(key);
  }
+ minres.sort();
+ console.log(minres);
+ var first= 0;
+ var firstIsNot =0;
+ for (var i = 0; i < localStorage.length; i++) 
+ {
+ 	first = minres[i];
+ 	for (var j = 0; j < localStorage.length; j++) 
+ 	{
+ 		let key = localStorage.key(j);
+ 		firstIsNot = key.match(/[0-9]+/);
+ 		//console.log(parseInt(first)+"="+parseInt(firstIsNot));
+ 		if(parseInt(first)==parseInt(firstIsNot))
+ 		 {
+		//console.log(key);
+ 			AddFromStorage(key);
+ 		}
+ 	}
+ }
+  //AddFromStorage(key);
+
+
  window.addEventListener('load',funcRef());
 }
 
- function AddFromStorage(key)
+ function AddFromStorage(kkey)
 {
-var noteAdd  = JSON.parse(localStorage.getItem(key));
+
+var noteAdd  = JSON.parse(localStorage.getItem(kkey));
 if(noteAdd.idgen>=i)i=noteAdd.idgen+1;
 
-console.log(noteAdd);
+//console.log(noteAdd);
  txt = noteAdd.alltext;
 
 var textarDate =document.getElementById("dateEdit");
@@ -431,7 +479,8 @@ if(words.length>0)
 		mainText.innerHTML="<a href='#' style='display: block;  height: 100%;' onclick='' >"+words[0]+"<br>";
 	if(words.length>1)
 	{
-	note.innerHTML="<a href='#"+key+noteAdd.idgen+"' id='"+key+noteAdd.idgen+"' class='notChosen' onclick='GetCurrent(this)' ><div class='mainText' style='color:#c4c4c6; margin-left:10px;'>"+
+		
+	note.innerHTML="<a href='#"+kkey+"' id='"+kkey+"' class='notChosen' onclick='GetCurrent(this)' ><div class='mainText' style='color:#c4c4c6; margin-left:10px;'>"+
 	wordForMain+"</div> <div class='date' style='color:#f2e6d0;display:inline;margin-left:10px font-size:15px;'>"+
 	noteAdd.date+"."+(noteAdd.month)+"."+noteAdd.year +"</div><div class='subText' style='color:#e2c690; display:inline; margin-left:30px;font-size: 18px;'>\t"
 	+wordForSub+"</div>"+"</a>";
@@ -439,14 +488,16 @@ if(words.length>0)
 	//note.innerHTML+="<div class='date'>"+dd.getDate()+"."+(dd.getMonth()+1)+"."+dd.getFullYear() +"</div>";
 	
 	//console.log(note.innerHTML );
-	elem.append(note);
-	elem.append(line);
+	//alert(kkey);
+		elem.prepend(line);
+	elem.prepend(note);
+
 
 	}
 	else
 	{
 	
-	note.innerHTML="<a href='#"+key+noteAdd.idgen+"' id='"+key+noteAdd.idgen+"' class='notChosen' onclick='GetCurrent(this)' ><div class='mainText' style='color:#c4c4c6; margin-left:10px;'>"+
+	note.innerHTML="<a href='#"+kkey+"' id='"+kkey+"' class='notChosen' onclick='GetCurrent(this)' ><div class='mainText' style='color:#c4c4c6; margin-left:10px;'>"+
 	wordForMain+"</div> <div class='date' style='color:#f2e6d0;display:inline;margin-left:10px font-size:15px;'>"+
 	noteAdd.date+"."+(noteAdd.month)+"."+noteAdd.year +"</div></a>";
 	elem.append(note);
