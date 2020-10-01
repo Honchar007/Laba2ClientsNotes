@@ -14,15 +14,12 @@ if(location.hash!="")
 {
 	//alert(val);
 	;
-	funcRef();
-	var elem = document.getElementById(val);
-	GetCurrent(elem);
+	
 
 }
 */
-
-
-window.onhashchange = funcRef;
+//funcRef();
+window.addEventListener("hashchange", funcRef, false);
 function funcRef()
 {
 
@@ -30,11 +27,12 @@ function funcRef()
 	try
 	{
 		var val = location.hash.match(/[^#]+/g);
-		alert(val);
+		//alert(val);
 	var textarDate =document.getElementById("dateEdit");
 var dd = new Date();
 	var localValue = JSON.parse(localStorage.getItem(val));
 	var elem = document.getElementById(val);
+	
 	GetCurrent(elem);
 	//alert(val+" Funcref");
 	//alert("ID " +val);
@@ -185,6 +183,7 @@ function GetCurrent(val)
 {
 //if(val.id != last.id)last.setAttribute("style","display: block;text-decoration: none;  height: 100%;");
 console.log(val);
+//alert(val);
 var val2 = location.hash.match(/[^#]+/g);
 
 var noteAdd  = JSON.parse(localStorage.getItem(val2));
@@ -370,6 +369,7 @@ function AddStorage()
   let key = localStorage.key(i);
   AddFromStorage(key);
  }
+ window.addEventListener('load',funcRef());
 }
 
  function AddFromStorage(key)
