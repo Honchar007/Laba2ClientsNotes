@@ -228,7 +228,7 @@ function Delete()
 	var deleteOrNot = window.location.href.match(/[^#]+/g);
 	if(deleteOrNot[1]!=undefined)
 	{
-		alert(deleteOrNot[1]+"DELETE");
+		//alert(deleteOrNot[1]+"DELETE");
 		var link = window.location.href;
 var words = link.split('#');
 var elem = document.getElementById("notes");
@@ -395,7 +395,7 @@ var minres =  [];
   //alert(key);
  }
  minres.sort();
- console.log(minres);
+ //console.log(minres);
  var first= 0;
  var firstIsNot =0;
  for (var i = 0; i < localStorage.length; i++) 
